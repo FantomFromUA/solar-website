@@ -16,3 +16,17 @@
     align-items: center;
     justify-content: space-between;
 }
+
+.header{
+    height: 50px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: aqua;
+}
+
+.header_item{
+    padding: 10px;
+    margin: 10px;
+}
