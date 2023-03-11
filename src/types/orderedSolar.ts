@@ -1,29 +1,28 @@
 import Solar from "../classes/Solar";
 
-export enum SolarTypes{
-    FETCH_SOLARS = "FETCH_SOLARS",
-    FETCH_SOLARS_SUCCESS = "FETCH_SOLARS_SUCCESS",
-    FETCH_SOLARS_ERROR = "FETCH_SOLARS_ERROR"
+export enum OrderedSolarTypes{
+    ADD_SOLAR = "ADD_SOLAR",
+    DELETE_SOLAR = "DELETE_SOLAR",
+    CHANGE_QUANTITY = "CHANGE_QUANTITY"
 }
 
-interface FetchSolarAction{
-    type: SolarTypes.FETCH_SOLARS;
+interface AddOrderedSolarAction{
+    type: OrderedSolarTypes.ADD_SOLAR;
+    payload: Solar;
 }
 
-interface FetchSolarSuccessAction{
-    type: SolarTypes.FETCH_SOLARS_SUCCESS;
+interface DeleteOrderedSolarAction{
+    type: OrderedSolarTypes.DELETE_SOLAR;
+    payload: Solar;
+}
+
+interface ChangeQuantityAction{
+    type: OrderedSolarTypes.CHANGE_QUANTITY;
     payload: any[];
 }
 
-interface FetchSolarErrorAction{
-    type: SolarTypes.FETCH_SOLARS_ERROR;
-    payload: string;
-}
+export type OrderedSolarAction = AddOrderedSolarAction | DeleteOrderedSolarAction | ChangeQuantityAction;
 
-export type SolarAction = FetchSolarAction | FetchSolarErrorAction | FetchSolarSuccessAction;
-
-export interface SolarState{
-    solars : Solar[],
-    loading: boolean,
-    error: null | string
+export interface OrderedSolarState{
+    orderedSolars : Solar[]
 }

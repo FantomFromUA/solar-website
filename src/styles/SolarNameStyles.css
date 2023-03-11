@@ -1,3 +1,15 @@
-.container{
-    border: 3px solid crimson;
+.solar_container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.text{
+    font-size: 40px;
+}
+
+.button_submit{
+    width: 150%;
+    height: 50px;
+    font-size: 25px;
 }

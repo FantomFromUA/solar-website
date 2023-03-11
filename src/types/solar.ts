@@ -12,7 +12,7 @@ interface FetchSolarAction{
 
 interface FetchSolarSuccessAction{
     type: SolarTypes.FETCH_SOLARS_SUCCESS;
-    payload: any[];
+    payload: Solar[];
 }
 
 interface FetchSolarErrorAction{

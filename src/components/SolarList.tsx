@@ -2,7 +2,6 @@ import React, {useEffect} from "react"
 import { useTypedSelector } from "../hooks/useTypedSelector";
 import { fetchSolars } from "../store/actions-creator/fetchSolars";
 import { store } from "../store";
-import "../styles.css";
 import SolarComponent from "./SolarComponent";
 
 const SolarList : React.FC = () => {
