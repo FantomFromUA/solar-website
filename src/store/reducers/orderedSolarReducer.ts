@@ -1,23 +1,44 @@
 import {OrderedSolarAction, OrderedSolarState, OrderedSolarTypes} from "../../types/orderedSolar";
-import Solar from "../../classes/Solar";
+import OrderedSolar from "../../interfaces/OrderedSolar";
 
 const initialState : OrderedSolarState = {
-    orderedSolars : [new Solar("bebra", 1, 22)]
+    orderedSolars : []
 }
 
 export const orderedSolarReducer = (state = initialState, action : OrderedSolarAction) : OrderedSolarState => {
     switch(action.type){
         case OrderedSolarTypes.ADD_SOLAR:
-            return {orderedSolars: [...state.orderedSolars, action.payload]};
+            return {
+                orderedSolars: [...state.orderedSolars, action.payload]
+            };
         case OrderedSolarTypes.DELETE_SOLAR:
-            return {orderedSolars: [...deleteSolar(state.orderedSolars, action.payload)]};
+            return {
+                orderedSolars: deleteSolar([...state.orderedSolars], action.payload)
+            };
         case OrderedSolarTypes.CHANGE_QUANTITY:
-            return {orderedSolars: [...state.orderedSolars]};
+            return {
+                orderedSolars: changeQuantity([...state.orderedSolars], action.payload.name, action.payload.num)
+            };
+        case OrderedSolarTypes.DELETE_ALL:
+            return {
+                orderedSolars: []
+            };
         default:
             return state;
     }
 }
 
-const deleteSolar = (solars: Solar[], solarToDelete: Solar): Solar[] => {
-    return solars.filter(solar => solar.name === solarToDelete.name);
+const deleteSolar = (solars: OrderedSolar[], name: string): OrderedSolar[] => {
+    return solars.filter(solar => solar.name !== name);
+}
+
+const changeQuantity = (solars: OrderedSolar[], name: string, num: number) : OrderedSolar[] => {
+    console.log(num + name)
+    const updatedSolars = solars.map((solar) => {
+        if (solar.name === name) {
+            return { ...solar, orderedQuantity: num };
+        }
+        return solar;
+    });
+    return updatedSolars;
 }

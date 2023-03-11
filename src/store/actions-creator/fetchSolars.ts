@@ -1,7 +1,6 @@
 import { Dispatch } from "react"
 import { SolarAction, SolarTypes } from "../../types/solar"
 import axios from "axios"
-import Solar from "../../classes/Solar";
 
 
 export const fetchSolars = () => {
@@ -9,13 +8,13 @@ export const fetchSolars = () => {
         try{
             dispatch({type: SolarTypes.FETCH_SOLARS})
             const response = await axios.get("https://testtask.twnty.de/");
-            const solarsArray : Solar[] = [];
+            const solarsArray : any[] = [];
             for(let name in response.data){
-                solarsArray.push(new Solar(
-                    name,
-                    response.data[name].quantity,
-                    response.data[name].price
-                ));
+                solarsArray.push({
+                    name : name,
+                    quantity: response.data[name].quantity,
+                    price: response.data[name].price
+                });
             }
             dispatch({type: SolarTypes.FETCH_SOLARS_SUCCESS, payload: solarsArray});
         }catch{

@@ -4,6 +4,7 @@ import {BrowserRouter, Route, Routes} from "react-router-dom";
 import Header from "./components/Header";
 import WrongPath from "./pages/WrongPath";
 import SolarName from "./pages/SolarName";
+import Basket from "./pages/Basket";
 
 function App() {
     return (
@@ -12,6 +13,7 @@ function App() {
             <Routes>
                 <Route path="/solar" element={<SolarList/>}></Route>
                 <Route path="/solar/:name" element={<SolarName/>}></Route>
+                <Route path="/basket" element={<Basket/>}></Route>
                 <Route path="*" element={<WrongPath/>}/>
             </Routes>
         </BrowserRouter>

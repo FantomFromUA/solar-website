@@ -1,28 +1,39 @@
-import Solar from "../classes/Solar";
+import Solar from "../interfaces/Solar";
+import OrderedSolar from "../interfaces/OrderedSolar";
+import ChangeQuantity from "../interfaces/ChangeQuantity";
 
 export enum OrderedSolarTypes{
     ADD_SOLAR = "ADD_SOLAR",
     DELETE_SOLAR = "DELETE_SOLAR",
-    CHANGE_QUANTITY = "CHANGE_QUANTITY"
+    CHANGE_QUANTITY = "CHANGE_QUANTITY",
+    DELETE_ALL = "DELETE_ALL"
 }
 
 interface AddOrderedSolarAction{
     type: OrderedSolarTypes.ADD_SOLAR;
-    payload: Solar;
+    payload: OrderedSolar;
 }
 
 interface DeleteOrderedSolarAction{
     type: OrderedSolarTypes.DELETE_SOLAR;
-    payload: Solar;
+    payload: string;
 }
 
 interface ChangeQuantityAction{
     type: OrderedSolarTypes.CHANGE_QUANTITY;
-    payload: any[];
+    payload: ChangeQuantity;
 }
 
-export type OrderedSolarAction = AddOrderedSolarAction | DeleteOrderedSolarAction | ChangeQuantityAction;
+interface DeleteAllSolarsAction{
+    type: OrderedSolarTypes.DELETE_ALL;
+}
+
+
+export type OrderedSolarAction = AddOrderedSolarAction
+    | DeleteOrderedSolarAction
+    | ChangeQuantityAction
+    | DeleteAllSolarsAction;
 
 export interface OrderedSolarState{
-    orderedSolars : Solar[]
+    orderedSolars : OrderedSolar[]
 }

@@ -1,4 +1,4 @@
-import Solar from "../classes/Solar";
+import Solar from "../interfaces/Solar";
 
 export enum SolarTypes{
     FETCH_SOLARS = "FETCH_SOLARS",
@@ -12,7 +12,7 @@ interface FetchSolarAction{
 
 interface FetchSolarSuccessAction{
     type: SolarTypes.FETCH_SOLARS_SUCCESS;
-    payload: Solar[];
+    payload: any[];
 }
 
 interface FetchSolarErrorAction{

@@ -1,18 +1,19 @@
 import React, {useEffect} from 'react';
-import {useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import {useTypedSelector} from "../hooks/useTypedSelector";
 import {fetchSolars} from "../store/actions-creator/fetchSolars";
 import {store} from "../store";
-import Solar from "../classes/Solar";
+import Solar from "../interfaces/Solar";
 import "../styles/SolarNameStyles.css";
 import {OrderedSolarTypes} from "../types/orderedSolar";
 
 const SolarName = () => {
     const params = useParams();
     const {solars, error, loading} = useTypedSelector(state => state.solar);
-    const {orderedSolars} = useTypedSelector(state => state.orderedSolar);
+    const orderedSolars = useTypedSelector(state => state.orderedSolar);
     const dispatch = store.dispatch;
     const solar = getSolarByName(params.name);
+    const router = useNavigate();
 
     useEffect(() => {
         dispatch(fetchSolars());
@@ -24,12 +25,15 @@ const SolarName = () => {
                 return solars[i];
             }
         }
-        return null; // return null if no Solar object is found with the given name
+        return null;
     }
 
     const addSolar = () =>{
-        dispatch({type: OrderedSolarTypes.ADD_SOLAR, payload: solar});
-        console.log(orderedSolars);
+        dispatch({type: OrderedSolarTypes.ADD_SOLAR, payload: {
+                ...solar,
+                orderedQuantity: 1
+            }});
+        router("/solar");
     }
 
     if(solar === null){
@@ -38,7 +42,6 @@ const SolarName = () => {
         );
     }
 
-    console.log(orderedSolars)
 
     return (
         <div className="solar_container">

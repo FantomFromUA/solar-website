@@ -1,5 +1,5 @@
 import React from "react"
-import Solar from "../classes/Solar";
+import Solar from "../interfaces/Solar";
 import {useNavigate} from "react-router-dom";
 
 const SolarComponent : React.FC<{solar: Solar}> = (props) => {

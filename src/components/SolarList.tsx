@@ -11,7 +11,6 @@ const SolarList : React.FC = () => {
         dispatch(fetchSolars());
     }, []);
 
-    console.log(solars)
 
     if(loading){
         <h1>Loading...</h1>
@@ -20,6 +19,8 @@ const SolarList : React.FC = () => {
     if(error){
         return <h1>{error}</h1>
     }
+
+    console.log(solars)
 
     return(
         <div className="container">
