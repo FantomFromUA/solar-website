@@ -5,6 +5,8 @@ import orderedSolar from "../interfaces/OrderedSolar";
 import {store} from "../store";
 import {OrderedSolarTypes} from "../types/orderedSolar";
 import {useNavigate} from "react-router-dom";
+import {SolarTypes} from "../types/solar";
+import solar from "../interfaces/Solar";
 
 const Basket : React.FC = () => {
 
@@ -19,8 +21,9 @@ const Basket : React.FC = () => {
         }
         return res;
     }
-
     const [ totalPrice, setTotalPrice ] = useState(initializeTotalPrice());
+
+
 
     const changeTotalPrice = (num : number) =>{
         setTotalPrice(totalPrice + num);
@@ -28,8 +31,17 @@ const Basket : React.FC = () => {
 
     const submitOrder = () => {
         setTotalPrice(0);
+        for(let orderedSolar in orderedSolars){
+            dispatch({
+                type: SolarTypes.CHANGE_SOLAR_QUANTITY,
+                payload: {
+                    name: orderedSolars[orderedSolar].name,
+                    num: orderedSolars[orderedSolar].quantity - orderedSolars[orderedSolar].orderedQuantity
+                }
+            });
+        }
         dispatch({type: OrderedSolarTypes.DELETE_ALL});
-        route("/solar");
+        alert(`Success order\n total price - ${totalPrice}`);
     }
 
     return (

@@ -17,7 +17,7 @@ export const orderedSolarReducer = (state = initialState, action : OrderedSolarA
             };
         case OrderedSolarTypes.CHANGE_QUANTITY:
             return {
-                orderedSolars: changeQuantity([...state.orderedSolars], action.payload.name, action.payload.num)
+                orderedSolars: changeQuantity(state.orderedSolars, action.payload.name, action.payload.num)
             };
         case OrderedSolarTypes.DELETE_ALL:
             return {
@@ -48,12 +48,10 @@ const deleteSolar = (solars: OrderedSolar[], name: string): OrderedSolar[] => {
 }
 
 const changeQuantity = (solars: OrderedSolar[], name: string, num: number) : OrderedSolar[] => {
-    console.log(num + name)
-    const updatedSolars = solars.map((solar) => {
+    return solars.map((solar) => {
         if (solar.name === name) {
             return { ...solar, orderedQuantity: num };
         }
         return solar;
     });
-    return updatedSolars;
 }

@@ -20,8 +20,6 @@ const SolarList : React.FC = () => {
         return <h1>{error}</h1>
     }
 
-    console.log(solars)
-
     return(
         <div className="container">
             {

@@ -1,9 +1,11 @@
 import Solar from "../interfaces/Solar";
+import ChangeQuantity from "../interfaces/ChangeQuantity";
 
 export enum SolarTypes{
     FETCH_SOLARS = "FETCH_SOLARS",
     FETCH_SOLARS_SUCCESS = "FETCH_SOLARS_SUCCESS",
-    FETCH_SOLARS_ERROR = "FETCH_SOLARS_ERROR"
+    FETCH_SOLARS_ERROR = "FETCH_SOLARS_ERROR",
+    CHANGE_SOLAR_QUANTITY = "CHANGE_SOLAR_QUANTITY"
 }
 
 interface FetchSolarAction{
@@ -12,7 +14,7 @@ interface FetchSolarAction{
 
 interface FetchSolarSuccessAction{
     type: SolarTypes.FETCH_SOLARS_SUCCESS;
-    payload: any[];
+    payload: Solar[];
 }
 
 interface FetchSolarErrorAction{
@@ -20,7 +22,12 @@ interface FetchSolarErrorAction{
     payload: string;
 }
 
-export type SolarAction = FetchSolarAction | FetchSolarErrorAction | FetchSolarSuccessAction;
+interface ChangeSolarQuantityAction{
+    type: SolarTypes.CHANGE_SOLAR_QUANTITY;
+    payload: ChangeQuantity
+}
+
+export type SolarAction = FetchSolarAction | FetchSolarErrorAction | FetchSolarSuccessAction | ChangeSolarQuantityAction;
 
 export interface SolarState{
     solars : Solar[],

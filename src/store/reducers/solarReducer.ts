@@ -1,4 +1,5 @@
-import { SolarState, SolarAction, SolarTypes } from "../../types/solar";
+import {SolarAction, SolarState, SolarTypes} from "../../types/solar";
+import Solar from "../../interfaces/Solar";
 
 const initialState : SolarState = {
     solars : [],
@@ -9,12 +10,23 @@ const initialState : SolarState = {
 export const solarReducer = (state = initialState, action : SolarAction) : SolarState => {
     switch(action.type){
         case SolarTypes.FETCH_SOLARS:
-             return {loading: true, error: null, solars: []};
+             return {...state, loading: true};
         case SolarTypes.FETCH_SOLARS_SUCCESS:
-            return {loading: false, error: null, solars: action.payload};
+            return {...state, loading: false, solars: action.payload};
         case SolarTypes.FETCH_SOLARS_ERROR:
-            return {loading: false, error: action.payload, solars: []};
+            return {...state, loading: false, error: action.payload};
+        case SolarTypes.CHANGE_SOLAR_QUANTITY:
+            return {...state, solars: changeQuantity(state.solars, action.payload.name, action.payload.num)}
         default:
             return state;
     }
+}
+
+const changeQuantity = (solars: Solar[], name: string, num: number) : Solar[] => {
+    return solars.map((solar) => {
+        if (solar.name === name) {
+            return { ...solar, orderedQuantity: num };
+        }
+        return solar;
+    });
 }
