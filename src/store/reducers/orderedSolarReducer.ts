@@ -9,7 +9,7 @@ export const orderedSolarReducer = (state = initialState, action : OrderedSolarA
     switch(action.type){
         case OrderedSolarTypes.ADD_SOLAR:
             return {
-                orderedSolars: [...state.orderedSolars, action.payload]
+                orderedSolars: [...addSolar(action.payload, state.orderedSolars)]
             };
         case OrderedSolarTypes.DELETE_SOLAR:
             return {
@@ -26,6 +26,21 @@ export const orderedSolarReducer = (state = initialState, action : OrderedSolarA
         default:
             return state;
     }
+}
+
+const addSolar = (solarToAdd: OrderedSolar, solars: OrderedSolar[]) : OrderedSolar[] => {
+    let exist : boolean = false;
+    for(let solar in solars){
+        if(solars[solar].name === solarToAdd.name){
+            exist = true;
+        }
+    }
+
+    if(exist){
+        return solars;
+    }
+
+    return [...solars, solarToAdd];
 }
 
 const deleteSolar = (solars: OrderedSolar[], name: string): OrderedSolar[] => {
